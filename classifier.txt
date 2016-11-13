@@ -1,0 +1,3 @@
+data = csvread('data.csv', 1, 0);
+graduated_ontime = data(data(:,1)==0,:);
+graduated_late = data(data(:,1)==1,:);

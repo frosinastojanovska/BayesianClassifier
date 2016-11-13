@@ -1,0 +1,14 @@
+graduated
+0->graduated_ontime
+1->graduated_late
+2->not_graduated
+
+grade_secondary
+0->vocational
+1->general
+
+number_failed_courses
+0->0
+1->1-2
+2->3-5
+3->>5
