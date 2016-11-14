@@ -3,9 +3,15 @@ graduated
 1->graduated_late
 2->not_graduated
 
-grade_secondary
+grade_secondary_education
+number between 2.00 and 5.00
+
+secondary_education_type
 0->vocational
 1->general
+
+grade_fist_year
+number between 6.00 and 10.00
 
 number_failed_courses
 0->0
