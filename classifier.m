@@ -18,29 +18,29 @@ function y = classifier(grade_secondary_education,secondary_education_type,grade
     probabilities_not_graduated = calculateProbability(not_graduated);
     
     %calculate probabilities of each class for the sample from P(x|C)
-    probability_graduated_ontime = normpdf(grade_secondary_education, probabilities_graduated_ontime{1,1}(1), sqrt(probabilities_graduated_ontime{1,1}(2))); %normal probability distribution
-    probability_graduated_ontime = probability_graduated_ontime * probabilities_graduated_ontime{1,2}(secondary_education_type+1); %probability for specific type of secondary education
-    probability_graduated_ontime = probability_graduated_ontime * normpdf(grade_first_year, probabilities_graduated_ontime{1,3}(1), sqrt(probabilities_graduated_ontime{1,3}(2))); %normal probability distribution
-    probability_graduated_ontime = probability_graduated_ontime * probabilities_graduated_ontime{1,4}(number_failed_courses+1); %probability for specific num of 
+    p1 = normpdf(grade_secondary_education, probabilities_graduated_ontime{1,1}(1), sqrt(probabilities_graduated_ontime{1,1}(2))); %normal probability distribution
+    p1 = p1 * probabilities_graduated_ontime{1,2}(secondary_education_type+1); %probability for specific type of secondary education
+    p1 = p1 * normpdf(grade_first_year, probabilities_graduated_ontime{1,3}(1), sqrt(probabilities_graduated_ontime{1,3}(2))); %normal probability distribution
+    p1 = p1 * probabilities_graduated_ontime{1,4}(number_failed_courses+1); %probability for specific num of 
     
-    probability_graduated_late = normpdf(grade_secondary_education, probabilities_graduated_late{1,1}(1), sqrt(probabilities_graduated_late{1,1}(2)));
-    probability_graduated_late = probability_graduated_late * probabilities_graduated_late{1,2}(secondary_education_type+1);
-    probability_graduated_late = probability_graduated_late * normpdf(grade_first_year, probabilities_graduated_late{1,3}(1), sqrt(probabilities_graduated_late{1,3}(2)));
-    probability_graduated_late = probability_graduated_late * probabilities_graduated_late{1,4}(number_failed_courses+1);
+    p2 = normpdf(grade_secondary_education, probabilities_graduated_late{1,1}(1), sqrt(probabilities_graduated_late{1,1}(2)));
+    p2 = p2 * probabilities_graduated_late{1,2}(secondary_education_type+1);
+    p2 = p2 * normpdf(grade_first_year, probabilities_graduated_late{1,3}(1), sqrt(probabilities_graduated_late{1,3}(2)));
+    p2 = p2 * probabilities_graduated_late{1,4}(number_failed_courses+1);
     
-    probability_not_graduated = normpdf(grade_secondary_education, probabilities_not_graduated{1,1}(1), sqrt(probabilities_not_graduated{1,1}(2)));
-    probability_not_graduated = probability_not_graduated * probabilities_not_graduated{1,2}(secondary_education_type+1);
-    probability_not_graduated = probability_not_graduated * normpdf(grade_first_year, probabilities_not_graduated{1,3}(1), sqrt(probabilities_not_graduated{1,3}(2)));
-    probability_not_graduated = probability_not_graduated * probabilities_not_graduated{1,4}(number_failed_courses+1);
+    p3 = normpdf(grade_secondary_education, probabilities_not_graduated{1,1}(1), sqrt(probabilities_not_graduated{1,1}(2)));
+    p3 = p3 * probabilities_not_graduated{1,2}(secondary_education_type+1);
+    p3 = p3 * normpdf(grade_first_year, probabilities_not_graduated{1,3}(1), sqrt(probabilities_not_graduated{1,3}(2)));
+    p3 = p3 * probabilities_not_graduated{1,4}(number_failed_courses+1);
     
     
     %the class with maximum probability is the class for the output of the
     %sample
-    if probability_graduated_ontime > probability_graduated_late && probability_graduated_ontime > probability_not_graduated
+    if p1 > p2 && p1 > p3
         y = 'gratuated_ontime';
-    elseif probability_graduated_late > probability_graduated_ontime && probability_graduated_late > probability_not_graduated
+    elseif p2 > p1 && p2 > p3
         y = 'graduated_late';
-    elseif probability_not_graduated > probability_graduated_ontime && probability_not_graduated > probability_graduated_late
+    elseif p3 > p1 && p3 > p2
         y = 'not_graduated';
     end
     
