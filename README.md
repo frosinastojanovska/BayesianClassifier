@@ -1,4 +1,4 @@
-# BayesianClassifier
+# NaiveBayesClassifier
 
 The file *classifier.m* holds a function that represents **Naïve Bayes classifier** for classifying students of the second year of Faculty of Computer Science and Engineering - Skopje, in the categories of "will graduate on time", "will graduate with a delay", "will not graduate".
 
